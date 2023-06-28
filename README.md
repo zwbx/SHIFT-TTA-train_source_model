@@ -11,7 +11,7 @@ Two modification is conducted on original MMSeg
 - Add the training config
 
 # Installation of MMSeg
-This setection is quoted from MMSeg official guide
+This section is quoted from MMSeg official guide
 
 <details>
 <summary>
