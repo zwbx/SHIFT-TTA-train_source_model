@@ -1,5 +1,4 @@
 # Introduction
-
 This repo is for training the source model on the Continuous Test-time Adaptation setting on SHIFT dataset. 
 It is based on MMSeg 0.3. Follow the below two steps to train:
 
@@ -165,11 +164,6 @@ If you have some issues during the installation, please first view the [FAQ](not
 You may [open an issue](https://github.com/open-mmlab/mmsegmentation/issues/new/choose) on GitHub if no solution is found.
 
 </details>
-
-# 
-Two modification is conducted on original MMSeg
-- Add the Customed dataset class
-- Add the training config
   
 # Prepare the training dataset
 The data split of SHIFT uesd here is SHIFT/discret/training/images/front. 
@@ -178,8 +172,10 @@ The data split of SHIFT uesd here is SHIFT/discret/training/images/front.
     wget https://dl.cv.ethz.ch/shift/discrete/images/train/front/semseg.zip
     wget https://dl.cv.ethz.ch/shift/discrete/images/train/front/seq.csv
 
+- img.zip: input images
+- smseg.zip: semantic segmentation groud truth 
+- seq.csv: containing sequence information need to select only the *clear-daytime* sequence for source model training. 
 
-smseg.zip is the corrsponding semantic segmentation groud truth and seq.csv contains sequence information need to select only the *clear-daytime* sequence for source model training. 
 More details refer to [SHIFT offical website](https://www.vis.xyz/shift/download/).
 
 
