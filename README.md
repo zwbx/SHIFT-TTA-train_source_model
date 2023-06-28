@@ -3,15 +3,17 @@
 This repo is for training the source model on the Continuous Test-time Adaptation setting on SHIFT dataset. 
 It is based on MMSeg 0.3. Follow the below two steps to train:
 
-- Installation of MMSeg. Note that MMSeg used here is 0.3, while the one used in test-time adaptation evaluation is version of 0.11.
+- Installation of MMSeg.
 - Prepare the training dataset
 
 Two modification is conducted on original MMSeg
-- Add the Custommed dataset class
+- Add the Customed dataset class
 - Add the training config
 
 # Installation of MMSeg
-This section is quoted from MMSeg official guide
+This section is quoted from MMSeg official guide. 
+
+Note that MMSeg used here is 0.3, while the one used in test-time adaptation evaluation is version of 0.11.
 
 <details>
 <summary>
@@ -20,7 +22,7 @@ This section is quoted from MMSeg official guide
     
 ## Prerequisites
 
-In this section we demonstrate how to prepare an environment with PyTorch.
+In this section, we demonstrate how to prepare an environment with PyTorch.
 
 MMSegmentation works on Linux, Windows and macOS. It requires Python 3.6+, CUDA 9.2+ and PyTorch 1.5+.
 
@@ -223,23 +225,25 @@ You may [open an issue](https://github.com/open-mmlab/mmsegmentation/issues/new/
 
 # Prepare the training dataset
 The data split of SHIFT uesd here is SHIFT/discret/training/images/front. 
+
 `
 wget https://dl.cv.ethz.ch/shift/discrete/images/train/front/img.zip
 wget https://dl.cv.ethz.ch/shift/discrete/images/train/front/semseg.zip
 wget https://dl.cv.ethz.ch/shift/discrete/images/train/front/seq.csv
 `
+
 smseg.zip is the corrsponding semantic segmentation groud truth and seq.csv contains sequence information need to select only the *clear-daytime* sequence for source model training. 
-More details refer to (SHIFT offical website)[https://www.vis.xyz/shift/download/].
+More details refer to [SHIFT offical website](https://www.vis.xyz/shift/download/).
 
 
 # Add the Custommed dataset class
-[shift.py](ttps://github.com/zwbx/SHIFT-TTA-train_source_model/blob/main/mmseg/datasets/shift.py)in mmseg/datasets/ is added to load SHIFT dataset.
-Two fuciton is implemented:
+mmseg/datasets/[shift.py](ttps://github.com/zwbx/SHIFT-TTA-train_source_model/blob/main/mmseg/datasets/shift.py) is to load SHIFT dataset.
+Two functions is implemented:
 - only the *clear-daytime* sequence is load while training
-- 14 catoglories out of 22 are used, so label remapping is conducted
+- 14 categories out of 22 are used, so label remapping is conducted
 
 # Add the training config
- [deeplabv3_r50_shift_500x800.py](https://github.com/zwbx/SHIFT-TTA-train_source_model/blob/main/configs/deeplabv3_r50_shift_500x800.py) in configs/ is added as training setting.
+ configs/[deeplabv3_r50_shift_500x800.py](https://github.com/zwbx/SHIFT-TTA-train_source_model/blob/main/configs/deeplabv3_r50_shift_500x800.py) is training setting.
 
-The competition does not restrict the methods of semantic segmentation，models except deeplabv3_r50 is allowed to serve as source model.
+The competition does not restrict the methods of semantic segmentation, models except deeplabv3_r50 is allowed to serve as source model.
  
