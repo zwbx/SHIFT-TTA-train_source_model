@@ -240,5 +240,6 @@ Two fuciton is implemented:
 
 # Add the training config
  [deeplabv3_r50_shift_500x800.py](https://github.com/zwbx/SHIFT-TTA-train_source_model/blob/main/configs/deeplabv3_r50_shift_500x800.py) in configs/ is added as training setting.
+
 The competition does not restrict the methods of semantic segmentation，models except deeplabv3_r50 is allowed to serve as source model.
  
