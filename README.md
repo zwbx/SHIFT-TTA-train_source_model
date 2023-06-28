@@ -237,7 +237,7 @@ More details refer to [SHIFT offical website](https://www.vis.xyz/shift/download
 
 
 # Add the Custommed dataset class
-mmseg/datasets/[shift.py](ttps://github.com/zwbx/SHIFT-TTA-train_source_model/blob/main/mmseg/datasets/shift.py) is to load SHIFT dataset.
+mmseg/datasets/[shift.py](https://github.com/zwbx/SHIFT-TTA-train_source_model/blob/main/mmseg/datasets/shift.py) is to load SHIFT dataset.
 Two functions is implemented:
 - only the *clear-daytime* sequence is load while training
 - 14 categories out of 22 are used, so label remapping is conducted
