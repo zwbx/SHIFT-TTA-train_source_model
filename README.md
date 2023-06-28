@@ -6,9 +6,10 @@ It is based on MMSeg 0.3. Follow the below two steps to train:
 - Installation of MMSeg.
 - Prepare the training dataset
 
-Two modification is conducted on original MMSeg
-- Add the Customed dataset class
-- Add the training config
+finish steps above and excute commands
+```
+sh tools/dist_train.sh config/deeplabv3_r50_shift_500x800.py
+```
 
 # Installation of MMSeg
 This section is quoted from MMSeg official guide. 
@@ -78,63 +79,6 @@ pip install -v -e .
 # '-e' means installing a project in editable mode,
 # thus any local modifications made to the code will take effect without reinstallation.
 ```
-
-Case b: If you use mmsegmentation as a dependency or third-party package, install it with pip:
-
-```shell
-pip install "mmsegmentation>=1.0.0"
-```
-
-### Verify the installation
-
-To verify whether MMSegmentation is installed correctly, we provide some sample codes to run an inference demo.
-
-**Step 1.** We need to download config and checkpoint files.
-
-```shell
-mim download mmsegmentation --config pspnet_r50-d8_4xb2-40k_cityscapes-512x1024 --dest .
-```
-
-The downloading will take several seconds or more, depending on your network environment. When it is done, you will find two files `pspnet_r50-d8_4xb2-40k_cityscapes-512x1024.py` and `pspnet_r50-d8_512x1024_40k_cityscapes_20200605_003338-2966598c.pth` in your current folder.
-
-**Step 2.** Verify the inference demo.
-
-Option (a). If you install mmsegmentation from source, just run the following command.
-
-```shell
-python demo/image_demo.py demo/demo.png configs/pspnet/pspnet_r50-d8_4xb2-40k_cityscapes-512x1024.py pspnet_r50-d8_512x1024_40k_cityscapes_20200605_003338-2966598c.pth --device cuda:0 --out-file result.jpg
-```
-
-You will see a new image `result.jpg` on your current folder, where segmentation masks are covered on all objects.
-
-Option (b). If you install mmsegmentation with pip, open you python interpreter and copy&paste the following codes.
-
-```python
-from mmseg.apis import inference_model, init_model, show_result_pyplot
-import mmcv
-
-config_file = 'pspnet_r50-d8_4xb2-40k_cityscapes-512x1024.py'
-checkpoint_file = 'pspnet_r50-d8_512x1024_40k_cityscapes_20200605_003338-2966598c.pth'
-
-# build the model from a config file and a checkpoint file
-model = init_model(config_file, checkpoint_file, device='cuda:0')
-
-# test a single image and show the results
-img = 'demo/demo.png'  # or img = mmcv.imread(img), which will only load it once
-result = inference_model(model, img)
-# visualize the results in a new window
-show_result_pyplot(model, img, result, show=True)
-# or save the visualization results to image files
-# you can change the opacity of the painted segmentation map in (0, 1].
-show_result_pyplot(model, img, result, show=True, out_file='result.jpg', opacity=0.5)
-# test a video and show the results
-video = mmcv.VideoReader('video.mp4')
-for frame in video:
-   result = inference_segmentor(model, frame)
-   show_result_pyplot(model, result, wait_time=1)
-```
-
-You can modify the code above to test a single image or a video, both of these options can verify that the installation was successful.
 
 ### Customize Installation
 
@@ -222,27 +166,37 @@ You may [open an issue](https://github.com/open-mmlab/mmsegmentation/issues/new/
 
 </details>
 
-
+# 
+Two modification is conducted on original MMSeg
+- Add the Customed dataset class
+- Add the training config
+  
 # Prepare the training dataset
 The data split of SHIFT uesd here is SHIFT/discret/training/images/front. 
+    
+    wget https://dl.cv.ethz.ch/shift/discrete/images/train/front/img.zip
+    wget https://dl.cv.ethz.ch/shift/discrete/images/train/front/semseg.zip
+    wget https://dl.cv.ethz.ch/shift/discrete/images/train/front/seq.csv
 
-`
-wget https://dl.cv.ethz.ch/shift/discrete/images/train/front/img.zip
-wget https://dl.cv.ethz.ch/shift/discrete/images/train/front/semseg.zip
-wget https://dl.cv.ethz.ch/shift/discrete/images/train/front/seq.csv
-`
 
 smseg.zip is the corrsponding semantic segmentation groud truth and seq.csv contains sequence information need to select only the *clear-daytime* sequence for source model training. 
 More details refer to [SHIFT offical website](https://www.vis.xyz/shift/download/).
 
 
-# Add the Custommed dataset class
+# How to adapt to other mmsegmentation versions
+Two modification on original MMSeg lies in two aspects:
+- Add the Customed dataset class
+- Add the training config
+
+The silimar modifications will work for other verisons
+  
+## Add the Custommed dataset class
 mmseg/datasets/[shift.py](https://github.com/zwbx/SHIFT-TTA-train_source_model/blob/main/mmseg/datasets/shift.py) is to load SHIFT dataset.
 Two functions is implemented:
 - only the *clear-daytime* sequence is load while training
 - 14 categories out of 22 are used, so label remapping is conducted
 
-# Add the training config
+## Add the training config
  configs/[deeplabv3_r50_shift_500x800.py](https://github.com/zwbx/SHIFT-TTA-train_source_model/blob/main/configs/deeplabv3_r50_shift_500x800.py) is training setting.
 
 The competition does not restrict the methods of semantic segmentation, models except deeplabv3_r50 is allowed to serve as source model.
