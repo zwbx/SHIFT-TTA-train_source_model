@@ -8,14 +8,16 @@ It is based on MMSeg 0.3. Follow the below two steps to train:
 
 Two modification is conducted on original MMSeg
 - Add the Custommed dataset class
-- Add the training config 
+- Add the training config
+
+# Installation of MMSeg
+This setection is quoted from MMSeg official guide
 
 <details>
 <summary>
     <b>Get started: Install and Run MMSeg</b>
 </summary>
-
-
+    
 ## Prerequisites
 
 In this section we demonstrate how to prepare an environment with PyTorch.
@@ -25,7 +27,7 @@ MMSegmentation works on Linux, Windows and macOS. It requires Python 3.6+, CUDA 
 **Note:**
 If you are experienced with PyTorch and have already installed it, just skip this part and jump to the [next section](##installation). Otherwise, you can follow these steps for the preparation.
 
-**Step 0.** Download and install Miniconda from the [official website](https://docs.conda.io/en/latest/miniconda.html).
+**Step 0.** Download and install Miniconda from the (official website)[https://docs.conda.io/en/latest/miniconda.html].
 
 **Step 1.** Create a conda environment and activate it.
 
@@ -238,5 +240,5 @@ Two fuciton is implemented:
 
 # Add the training config
  [deeplabv3_r50_shift_500x800.py](https://github.com/zwbx/SHIFT-TTA-train_source_model/blob/main/configs/deeplabv3_r50_shift_500x800.py) in configs/ is added as training setting.
-deeplabv3_r50 is used in this demo. How  
+The competition does not restrict the methods of semantic segmentation，models except deeplabv3_r50 is allowed to serve as source model.
  
