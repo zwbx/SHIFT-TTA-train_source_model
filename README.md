@@ -231,11 +231,12 @@ More details refer to (SHIFT offical website)[https://www.vis.xyz/shift/download
 
 
 # Add the Custommed dataset class
-(deeplabv3_r50_shift_500x800.py)[https://github.com/zwbx/SHIFT-TTA-train_source_model/blob/main/configs/deeplabv3_r50_shift_500x800.py] in configs/ is added to load SHIFT dataset.
+[shift.py](ttps://github.com/zwbx/SHIFT-TTA-train_source_model/blob/main/mmseg/datasets/shift.py)in mmseg/datasets/ is added to load SHIFT dataset.
 Two fuciton is implemented:
 - only the *clear-daytime* sequence is load while training
 - 14 catoglories out of 22 are used, so label remapping is conducted
 
 # Add the training config
-
+ [deeplabv3_r50_shift_500x800.py](https://github.com/zwbx/SHIFT-TTA-train_source_model/blob/main/configs/deeplabv3_r50_shift_500x800.py) in configs/ is added as training setting.
+deeplabv3_r50 is used in this demo. How  
  
